@@ -46,7 +46,7 @@ def doc2vec(data_frame, attribute, vector_size=50, min_count=2, epochs=40, save_
         sentences = []
         for i, text in enumerate(data_frame.get(attribute)):
             sentences.append(gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(text), [i]))
-        model = doc2vec_model(sentences, vector_size=vector_size, min_count=min_count,
+        model = _doc2vec_model(sentences, vector_size=vector_size, min_count=min_count,
                               epochs=epochs, save_path=save_path)
 
     vectors = []
@@ -56,7 +56,7 @@ def doc2vec(data_frame, attribute, vector_size=50, min_count=2, epochs=40, save_
     return vectors
 
 
-def doc2vec_model(sentences, vector_size=50, min_count=2, epochs=40, save_path=None):
+def _doc2vec_model(sentences, vector_size=50, min_count=2, epochs=40, save_path=None):
     """Crea un modelo doc2vec entrenado con las instancias.
 
     sentences: instancias con las que entrenar. Vienen en forma de vector de instancias. Cada instancia es un vector de palabras.

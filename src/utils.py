@@ -16,6 +16,13 @@ def is_number(string):
         return False
 
 
+def parallel_shuffle(a, b):
+    # https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison
+    if len(a) == len(b):
+        p = np.random.permutation(len(a))
+        return a[p], b[p]
+
+
 def tfidf_filter(data_frame, attribute):
     """Aplica el filtro TF-IDF a las instancias.
 

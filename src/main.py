@@ -1,6 +1,9 @@
 from argparse import ArgumentParser
 import pandas as pd
+import numpy as np
 import utils
+from naive_bayes import NaiveBayes
+from combined_neural_network import CombinedNN
 
 
 def _get_args():
@@ -31,11 +34,11 @@ def _get_args():
                         action='store_true',
                         required=False,
                         help='')
-    parser.add_argument('-nb', '--naiveBayes',
+    parser.add_argument('-nb', '--naive_bayes',
                         action='store_true',
                         required=False,
                         help='')
-    parser.add_argument('-nn', '--neuralNetwork',
+    parser.add_argument('-nn', '--neural_network',
                         action='store_true',
                         required=False,
                         help='')
@@ -49,12 +52,6 @@ def _get_args():
 
 def main():
     args = _get_args()
-    neurons = []
-    for neuron in args.neurons:
-        try:
-            neurons.append(int(neuron))
-        except ValueError:
-            pass
 
     dataframe = pd.read_csv(args.data_path)
     if args.tfidf:
@@ -62,11 +59,23 @@ def main():
     elif args.doc2vec:
         instances = utils.doc2vec(dataframe, args.text_attribute)
     else:
-        print("wtf")
-
-    classes = list(dataframe[args.class_attribute])
-    print(instances)
-    print()
+        instances = None
+        exit(1)
+    classes = np.array(dataframe[args.class_attribute])
+    if args.naive_bayes:
+        classifier = NaiveBayes()
+    elif args.neural_network:
+        neurons = []
+        for neuron in args.neurons:
+            try:
+                neurons.append(int(neuron))
+            except ValueError:
+                pass
+        classifier = CombinedNN(neurons=neurons)
+    else:
+        classifier = None
+        exit(1)
+    classifier.k_fcv(k=10, instances=instances, classes=classes)
 
 
 if __name__ == '__main__':

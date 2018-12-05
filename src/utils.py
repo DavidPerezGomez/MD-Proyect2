@@ -44,7 +44,7 @@ def doc2vec(data_frame, attribute, vector_size=50, min_count=2, epochs=40, save_
     epochs: número de iteraciones sobre los datos."""
 
     if save_folder is not None:
-        save_path = os.path.join("save_folder", "doc2vec_{}_{}_{}.model".format(vector_size, min_count, epochs))
+        save_path = os.path.join(save_folder, "doc2vec_{}_{}_{}.model".format(vector_size, min_count, epochs))
     else:
         save_path = None
     if save_path is not None and os.path.isfile(save_path):
@@ -54,7 +54,7 @@ def doc2vec(data_frame, attribute, vector_size=50, min_count=2, epochs=40, save_
         for i, text in enumerate(data_frame.get(attribute)):
             sentences.append(gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(text), [i]))
         model = _doc2vec_model(sentences, vector_size=vector_size, min_count=min_count,
-                              epochs=epochs, save_path=save_path)
+                               epochs=epochs, save_path=save_path)
 
     vectors = []
     for i, text in enumerate(data_frame.get(attribute)):
@@ -76,6 +76,8 @@ def _doc2vec_model(sentences, vector_size=50, min_count=2, epochs=40, save_path=
     model.build_vocab(documents=sentences)
     model.train(sentences, total_examples=model.corpus_count, epochs=model.epochs)
     if save_path is not None:
+        if not os.path.isdir(save_path):
+            os.mkdir(os.path.abspath(os.path.join(save_path, os.pardir)))
         model.save(save_path)
     return model
 

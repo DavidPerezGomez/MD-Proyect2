@@ -35,16 +35,10 @@ class Classifier(ABC):
                                                assume_unique=True))
                 train_instances = instances[train_fold]
                 train_classes = classes[train_fold]
-                # test_instances = instances[test_fold]
-                # test_classes = classes[test_fold]
+                test_instances = instances[test_fold]
+                test_classes = classes[test_fold]
                 tmp_classifier = self.__class__(**self._kwargs)
                 tmp_classifier.train(train_instances, train_classes)
-                # print("fold: {}/{}".format(i, k))
-                # print("test_len: {}/{}".format(len(test_fold), len(instances)))
-                # print(test_fold)
-                # print("train_len: {}/{}".format(len(train_fold), len(instances)))
-                # print(train_fold)
-                # print("total_len: {}/{}".format(len(test_fold) + len(train_fold), len(instances)))
 
     @staticmethod
     def _make_folds(k, instances):
@@ -61,3 +55,7 @@ class Classifier(ABC):
             last = last + folds_length[i]
 
         return folds
+
+    @staticmethod
+    def eval(predictions, real_classes):
+        pass

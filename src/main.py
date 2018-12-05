@@ -57,7 +57,7 @@ def main():
     if args.tfidf:
         instances = utils.tfidf_filter(dataframe, args.text_attribute)
     elif args.doc2vec:
-        instances = utils.doc2vec(dataframe, args.text_attribute)
+        instances = utils.doc2vec(dataframe, args.text_attribute, save_folder=args.output_folder)
     else:
         instances = None
         exit(1)
@@ -75,6 +75,7 @@ def main():
     else:
         classifier = None
         exit(1)
+
     classifier.k_fcv(k=10, instances=instances, classes=classes)
 
 

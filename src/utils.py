@@ -17,7 +17,7 @@ def is_number(string):
 
 
 def parallel_shuffle(a, b):
-    # https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison
+    # https://stackoverflow.com/questions/4601373/better-way-to-shuffle-two-numpy-arrays-in-unison/4602224#4602224
     if len(a) == len(b):
         p = np.random.permutation(len(a))
         return a[p], b[p]
@@ -34,7 +34,7 @@ def tfidf_filter(data_frame, attribute):
     return tfidf_matrix.A
 
 
-def doc2vec(data_frame, attribute, vector_size=50, min_count=2, epochs=40, save_folder=None):
+def doc2vec(data_frame, attribute, vector_size=50, min_count=2, epochs=40, save_path=None):
     """Convierte las instancias en vectores utilizando la estrategia doc2vec.
 
     data_frame: instancias a filtrar. Vienen en forma de dataframe.
@@ -43,10 +43,6 @@ def doc2vec(data_frame, attribute, vector_size=50, min_count=2, epochs=40, save_
     min_count: número mínimo de veces que tiene que aparecer una palabra para ser tomada en cuenta.
     epochs: número de iteraciones sobre los datos."""
 
-    if save_folder is not None:
-        save_path = os.path.join(save_folder, "doc2vec_{}_{}_{}.model".format(vector_size, min_count, epochs))
-    else:
-        save_path = None
     if save_path is not None and os.path.isfile(save_path):
         model = d2v.Doc2Vec.load(save_path)
     else:
@@ -76,9 +72,10 @@ def _doc2vec_model(sentences, vector_size=50, min_count=2, epochs=40, save_path=
     model.build_vocab(documents=sentences)
     model.train(sentences, total_examples=model.corpus_count, epochs=model.epochs)
     if save_path is not None:
-        if not os.path.isdir(save_path):
-            os.mkdir(os.path.abspath(os.path.join(save_path, os.pardir)))
-        model.save(save_path)
+        try:
+            model.save(save_path)
+        except FileNotFoundError:
+            pass
     return model
 
 

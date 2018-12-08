@@ -10,8 +10,8 @@ class NaiveBayes(Classifier):
         self._trained_model = None
 
     def train(self, instances, classes):
-        super().train(instances, classes)
-        self._trained_model = self._model().fit(self._instances, self._classes)
+        self._set_input_format(instances, classes)
+        self._trained_model = self._model().fit(instances, classes)
 
     def predict(self, instances):
         if instances is None:

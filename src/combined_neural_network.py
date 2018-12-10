@@ -23,7 +23,8 @@ class CombinedNN(Classifier):
 
             sample, sample_classes = utils.bootstrap(instances, classes)
             sub_model = self._model(hidden_layer_sizes=self._neurons,
-                                    activation='logistic').fit(sample, sample_classes)
+                                    activation='logistic',
+                                    max_iter=600).fit(sample, sample_classes)
             predictions = sub_model.predict(instances)
             accuracy = accuracy_score(classes, predictions)
             self._trained_model.append({'model': sub_model, 'accuracy': accuracy})
@@ -31,24 +32,36 @@ class CombinedNN(Classifier):
     def predict(self, instances=None):
         if instances is None:
             instances = self._instances
-        probabilities = {}
+
+        predictions = []
         for model in self._trained_model:
-            prediction = dict(zip(model['model'].classes_,
-                                  model['model'].predict_proba(instances) * model['accuracy']))
+            prediction_tmp = model['model'].predict_proba(instances) * model['accuracy']
+            prediction = []
+            for i in range(len(instances)):
+                classes = model['model'].classes_
+                pred = prediction_tmp[i]
+                prediction.append(dict(zip(classes, pred)))
+            predictions.append(prediction)
+
+        probabilities = []
+        for i, instance in enumerate(instances):
+            probability = {}
             for class_name in self._class_names:
-                try:
-                    prob = prediction[class_name]
-                except KeyError:
-                    prob = 0
+                for prediction in predictions:
+                    try:
+                        prob = prediction[i][class_name]
+                    except KeyError:
+                        prob = 0
 
-                try:
-                    if probabilities[class_name] is not None:
-                        probabilities[class_name] += prob
+                    if class_name in probability:
+                        probability[class_name] += prob
                     else:
-                        probabilities[class_name] = prob
-                except KeyError:
-                    probabilities[class_name] = prob
+                        probability[class_name] = prob
+            probabilities.append(probability)
 
+        results = []
+        for probability in probabilities:
+            class_name = list(probability.keys())[np.argmax(list(probability.values()))]
+            results.append(class_name)
 
-        # TODO fix this shit
-        return self._class_names[np.argmax([probabilities[class_name] for class_name in self._class_names])]
+        return np.array(results)

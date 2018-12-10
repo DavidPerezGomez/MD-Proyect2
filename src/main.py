@@ -128,13 +128,19 @@ def main():
     if not os.path.isdir(os.path.abspath(args.output_folder)):
         os.mkdir(os.path.abspath(args.output_folder))
 
-    results_path = os.path.join(args.output_folder,
-                                "results_{}-fcv.txt".format(args.k))
+    results_path_txt = os.path.join(args.output_folder,
+                                    "results_{}-fcv.txt".format(args.k))
+    results_path_csv = os.path.join(args.output_folder,
+                                    "results_{}-fcv.csv".format(args.k))
     model_path = os.path.join(args.output_folder,
                               "model.pkl")
-    classifier.set_input_format(instances, classes)
-    classifier.k_fcv(k=args.k, instances=instances, classes=classes, save_path=results_path, verbose=args.verbose)
-    classifier.save_model(model_path)
+    classifier.set_input_format(instances[:50], classes[:50])
+    # classifier.train(instances, classes)
+    # classifier.predict(instances)
+    classifier.k_fcv(k=args.k, instances=instances, classes=classes,
+                     save_path_txt=results_path_txt, save_path_csv=results_path_csv,
+                     verbose=args.verbose)
+    # classifier.save_model(model_path)
 
 
 if __name__ == '__main__':

@@ -1,5 +1,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_selection import SelectKBest
 from sklearn.decomposition import PCA
+from sklearn.utils import resample
 import gensim
 import gensim.models.doc2vec as d2v
 import numpy as np
@@ -8,7 +10,6 @@ import os
 
 def is_number(string):
     """Devuelve True si el string representa un número."""
-
     try:
         float(string)
         return True
@@ -23,15 +24,26 @@ def parallel_shuffle(a, b):
         return a[p], b[p]
 
 
-def tfidf_filter(data_frame, attribute):
+def bootstrap(*vectors):
+    return resample(*vectors)
+
+
+def tfidf_filter(data_frame, text_attribute, class_attribute=None):
     """Aplica el filtro TF-IDF a las instancias.
 
     data_frame: instancias a filtrar. Vienen en forma de dataframe.
     attribute: nombre del atributo texto a transformar."""
 
     tfidf_vectorizer = TfidfVectorizer(use_idf=True)
-    tfidf_matrix = tfidf_vectorizer.fit_transform(data_frame[attribute].values.astype('U'))
-    return tfidf_matrix.A
+    tfidf_matrix = tfidf_vectorizer.fit_transform(data_frame[text_attribute].values.astype('U'))
+    instances = tfidf_matrix.toarray()
+    if class_attribute:
+        classes = list(data_frame[class_attribute])
+        print(instances.shape)
+        instances = SelectKBest(k=500).fit_transform(instances, classes)
+        print(instances.shape)
+
+    return instances
 
 
 def doc2vec(data_frame, attribute, vector_size=50, min_count=2, epochs=40, save_path=None):

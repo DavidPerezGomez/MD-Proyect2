@@ -10,32 +10,40 @@ class Classifier(ABC):
     def __init__(self, **kwargs):
         self._instances = None
         self._classes = None
+        self._class_names = None
         self._model = None
         self._trained_model = None
         self._kwargs = kwargs
 
-    def _set_input_format(self, instances, classes):
+    def set_input_format(self, instances, classes):
         self._instances = np.array(instances)
         self._classes = np.array(classes)
+        self._class_names = np.unique(classes)
 
     @abstractmethod
-    def train(self, instances, classes):
+    def train(self, instances, classes, verbose=False):
         pass
 
     @abstractmethod
     def predict(self, instances):
         pass
 
-    def k_fcv(self, k=10, instances=None, classes=None, save_path=None):
+    def k_fcv(self, k=10, instances=None, classes=None, save_path=None, verbose=False):
+        if verbose:
+            print('{}-FOLD CROSS-VALIDATION'.format(k))
+
         if instances is None or classes is None:
             instances = self._instances
             classes = self._classes
         if instances is not None and classes is not None:
-            self._set_input_format(instances, classes)
+            self.set_input_format(instances, classes)
             instances, classes = utils.parallel_shuffle(np.array(instances), np.array(classes))
             folds = self._make_folds(k=k, instances=instances)
             indiv_results = []
             for i in range(k):
+                if verbose:
+                    print('Fold {}/{}'.format(i + 1, k))
+
                 test_fold = folds[i]
                 train_fold = list(np.setdiff1d(np.array(list(range(len(instances)))),
                                                np.array(test_fold),
@@ -47,12 +55,20 @@ class Classifier(ABC):
                 test_classes = classes[test_fold]
 
                 tmp_classifier = self.__class__(**self._kwargs)
-                tmp_classifier.train(train_instances, train_classes)
+
+                if verbose:
+                    print('Entrenando modelo...')
+
+                tmp_classifier.train(train_instances, train_classes, verbose)
                 predictions = tmp_classifier.predict(test_instances)
+
+                if verbose:
+                    print('Realizando predicción...\n')
+
                 indiv_results.append(Results(predictions, test_classes))
 
-                if save_path:
-                    self._save_results(indiv_results, save_path)
+            if save_path:
+                self._save_results(indiv_results, save_path)
 
             return indiv_results
 

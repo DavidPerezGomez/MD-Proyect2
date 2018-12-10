@@ -8,7 +8,8 @@ d2v_folder="d2v_models"
 files_folder="files"
 clean_data="verbal_autopsies_clean.csv"
 results_folder="results"
-results_sub_folder="naive_bayes"
+# results_sub_folder="naive_bayes"
+results_sub_folder="neural_network"
 
 cd "$proyect_path"
 
@@ -17,11 +18,14 @@ arg_output_path="-o \"$proyect_path/$results_folder/$results_sub_folder\""
 arg_text_attr="-a open_response"
 arg_class_attr="-c gs_text34"
 arg_attr_conv="-d2v 50 2 40 \"$proyect_path/$d2v_folder/d2v_50_2_40.model\""
-arg_classifier="-nb"
+#arg_attr_conv="-t"
+arg_classifier="-nn 5 100"
+#arg_classifier="-nb"
 arg_k="-k 10"
+arg_verbose="-v"
 
 command="python3 $src_folder/$main_file $arg_data_path $arg_output_path $arg_text_attr \
-$arg_class_attr $arg_attr_conv $arg_classifier $arg_k"
+$arg_class_attr $arg_attr_conv $arg_classifier $arg_k $arg_verbose"
 
 echo -e "\033[32m$command\033[0m"
 echo

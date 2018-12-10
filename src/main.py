@@ -1,7 +1,7 @@
 """usage: main.py [-h] -d DATA_PATH -o OUTPUT_FOLDER -a TEXT_ATTRIBUTE -c
                CLASS_ATTRIBUTE
                [-t | -d2v VECTOR_SIZE MIN_COUNT EPOCHS MODEL_PATH]
-               [-nb | -nn NEURONS [NEURONS ...]] [-k K]
+               [-nb | -nn N_MODELS [NEURONS ...]] [-k K]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -22,7 +22,7 @@ optional arguments:
                         repeticiones. model_path: ruta en la que leer/guardar
                         el modelo doc2vec.
   -nb, --naive_bayes
-  -nn NEURONS [NEURONS ...], --neural_network NEURONS [NEURONS ...]
+  -nn N_MODELS [NEURONS ...], --neural_network N_MODELS [NEURONS ...]
                         neuronas de la red neuronal. Cada número es el número
                         de neuronas de na capa oculta.
   -k K                  número de folds para el k-fold cross-validation
@@ -75,12 +75,15 @@ def _get_args():
                         help='')
     group2.add_argument('-nn', '--neural_network',
                         nargs='+',
-                        metavar='NEURONS',
+                        metavar=('N_MODELS', 'NEURONS'),
                         help='neuronas de la red neuronal. Cada número es el número de neuronas de na capa oculta.')
     parser.add_argument('-k',
                         type=int,
                         default=10,
                         help='número de folds para el k-fold cross-validation')
+    parser.add_argument('-v', '--verbose',
+                        action='store_true',
+                        help='flag para imprimir información adicional por pantalla')
     return parser.parse_args()
 
 
@@ -89,7 +92,7 @@ def main():
 
     dataframe = pd.read_csv(args.data_path)
     if args.tfidf:
-        instances = utils.tfidf_filter(dataframe, args.text_attribute)
+        instances = utils.tfidf_filter(dataframe, args.text_attribute, args.class_attribute)
     elif args.doc2vec:
         vector_size = int(args.doc2vec[0])
         min_count = int(args.doc2vec[1])
@@ -109,13 +112,15 @@ def main():
     if args.naive_bayes:
         classifier = NaiveBayes()
     elif args.neural_network:
+        n_models = int(args.neural_network[0])
         neurons = []
-        for neuron in args.neural_network:
+        for neuron in args.neural_network[1:]:
             try:
                 neurons.append(int(neuron))
             except ValueError:
                 pass
-        classifier = CombinedNN(neurons=neurons)
+        neurons = tuple(neurons)
+        classifier = CombinedNN(neurons=neurons, n_models=n_models)
     else:
         classifier = None
         exit(1)
@@ -127,7 +132,8 @@ def main():
                                 "results_{}-fcv.txt".format(args.k))
     model_path = os.path.join(args.output_folder,
                               "model.pkl")
-    classifier.k_fcv(k=args.k, instances=instances, classes=classes, save_path=results_path)
+    classifier.set_input_format(instances, classes)
+    classifier.k_fcv(k=args.k, instances=instances, classes=classes, save_path=results_path, verbose=args.verbose)
     classifier.save_model(model_path)
 
 

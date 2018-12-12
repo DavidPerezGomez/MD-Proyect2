@@ -37,6 +37,7 @@
 	\block{DATOS}{
 	\begin{minipage}[t]{0.4\linewidth}
 	El conjunto de datos es Verbal Autopsies, un conjunto de autopsias verbales realizadas en diversos países y que agrupa una gran variedad de enfermedades y causas de muerte. Serán estas las que nuestro clasificador utilice como clase a predecir.as entradas, utilizaremos el atributo correspondiente a la autopsia verbal en sí (gs\_text34) como atributo y la enfermedad del fallecido como clase a predecir. 
+
 	\end{minipage}
 	\begin{adjustbox}{valign=t}
 	\begin{minipage}[t]{0.25\linewidth}
@@ -51,9 +52,9 @@
 	\textbf{Flujo de cambios} & \textbf{Descripción} \\ \hline
 	Raw 					& Conjunyo de textos original. \\
 	Limpieza textos vacíos 	& Se eliminan manualmente instancias duplicadas y aquellas que están vacías.\\
+	Tokenizer 				& Se eliminan las palabras que no aportan información (artículos, etc.).\\
 	Minusculas 				& Se convierte todo el texto a letras minúsculas. \\
-	Stemmer 				& Se sustituye cada palabra por su raíz. \\
-	Tokenizer 				& ? \\ \hline
+	Stemmer 				& Se sustituye cada palabra por su raíz. \\ \hline
 	\end{tabular}
 	\end{tikzfigure}
 	\end{minipage}\\
@@ -65,12 +66,11 @@
 	\column{0.30}
 	\block{REPRESENTACIÓN DE TEXTOS}{ }
     \block{TF-IDF}{
-		TF-IDF es una medida estadística que sirve para calcular la importancia de una palabra dentro de un texto. De forma simplificada, se considera que la importancia de una palabra aumenta cuantas más apariciones tenga en un documento dado, pero a su vez es inversamente proporcional a su ratio de aparición en otros documentos.
+    	\paragraph{}TF-IDF es una medida estadística que sirve para calcular la importancia de una palabra dentro de un texto. De forma simplificada, se considera que la importancia de una palabra aumenta cuantas más apariciones tenga en un documento dado, pero a su vez es inversamente proporcional a su ratio de aparición en otros documentos.
     }
     \block{Document Embeddings}{
-		Mediante Document Embeddings se puede representar cada texto de un conjunto de estos como un vector con valores numéricos, es decir, se representa cada texto en un espacio vectorial de n dimensiones. Esto es especialmente útil en casos como el que nos atañe, la clasificación, pues los clasificadores no pueden trabajar directamente con textos y necesitan que estos sean representados de alguna otra forma, siendo un vector una de las más simples de hacerlo.
-		
-		En nuestro caso utilizamos la librería Gensim para hacer esta transformación.
+		\paragraph{}Mediante Document Embeddings se puede representar cada texto de un conjunto de estos como un vector con valores numéricos. Sin embargo, al contrario que TF-IDF, Document Embeddings no crea un vector con tantos valores como palabras en el vocabulario, sino que se trata de un modelo que se entrena con un conjunto de textos y después, es capaz de asignar a nuevos textos vectores de forma que cuanto más similares sean dos textos, más cercanos serán sus correspondientes vectores.
+		\paragraph{}En nuestro caso utilizamos la librería Gensim para hacer esta transformación.
     }
     \column{0.30}
    	\block{CLASIFICADORES}{}
@@ -84,8 +84,9 @@
     }
 
     \column{0.40}
-    \block{Resultados}{
+    \block{RESULTADOS}{
     	\paragraph{}Los resultados se han obtenido aplicando el método 10-fold cross-validation a cada modelo utilizando los dos métodos de representación de atributos. En el caso del modelo de redes neuronales, realizamos distintas pruebas, cambiando los paŕametros (nº de modelos, nº de capas ocultas, nº de neuronas) y nos quedamos con los mejores resultados obtenidos.
+    	\paragraph{}Los resultados muestran, por un lado, que nuestro modelo tiene ligeramente más éxito que el de referencia, independientemente de la representación usada. También se puede ver que la decisión de utilizar TF-IDF para representar los atributos o de utilizar Document Embeddings también afecta al resultado, obteniendose méjores resultados con TF-IDF en ambos clasificadores. Es muy posible que al crear vectores de tamaño considerablemente menor, con Document Embeddings se pierda bastante información, lo que cause los peores resultados.
 		\includegraphics[scale=2]{img/PrecisionAccuracy.jpeg}
     }
     

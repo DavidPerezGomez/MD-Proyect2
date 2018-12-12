@@ -4,13 +4,14 @@
 \usepackage{xcolor}
 \usepackage{blindtext}
 \usepackage{comment}
+\usepackage{adjustbox}
 
 \title{Clasificación de Textos: Naive Bayes vs Neural Networks}
 \author{David Pérez Gómez \& Guzmán López Santamaría}
 \date{}
 \institute{EUITI - UPV/EHU}
 
-\usetheme{Simple}
+\usetheme{Desert}
 \usecolorstyle{Denmark}
 
 \tikzposterlatexaffectionproofoff
@@ -27,37 +28,54 @@
 
 \maketitle
 \begin{columns}
-	\column{0.30}
-	\block{Objetivos}{
+	\column{0.35}
+	\block{OBJETIVOS}{
 	Dado un conjunto de datos de autopsias verbales se quiere realizar un proceso de clasificación mediante el cual se prediga una clase para cada instancia. Este proceso se llevará a cabo mediante dos clasificadores diferentes y representando el conjunto de datos de dos formas distintas. El objetivo de este proyecto es analizar y comparar los resultados obtenidos para cada uno de los clasificadores y de las representaciones.
 	}
-
-	\column{0.40}
-	\block{}{
-	AQUÍ IRIA UNA PUTA TABLA
-	}
 	
-	\column{0.30}
-	\block{Datos}{
+	\column{0.65}
+	\block{DATOS}{
+	\begin{minipage}[t]{0.4\linewidth}
 	El conjunto de datos es Verbal Autopsies, un conjunto de autopsias verbales realizadas en diversos países y que agrupa una gran variedad de enfermedades y causas de muerte. Serán estas las que nuestro clasificador utilice como clase a predecir.
 	En cuanto a las entradas, utilizaremos el atributo correspondiente a la autopsia verbal en sí (gs\_text34). 
-	}	
+	\end{minipage}
+	\begin{adjustbox}{valign=t}
+	\begin{minipage}[t]{0.25\linewidth}
+	\end{minipage}
+	 \textcolor{white}{LUL} %No borrar, hace que haya división entre las minipage
+	\end{adjustbox}
+	\begin{adjustbox}{valign=t}
+	\begin{minipage}[t]{0.3\linewidth}
+	\begin{tikzfigure}
+	\begin{tabular}{|l|l|}
+	\hline
+	\textbf{Flujo de cambios} & \textbf{Descripción} \\ \hline
+	Raw 					& Conjunyo de textos original. \\
+	Limpieza textos vacíos 	& Se eliminan manualmente instancias duplicadas y aquellas que están vacías.\\
+	Minusculas 				& Se convierte todo el texto a letras minúsculas. \\
+	Stemmer 				& Se sustituye cada palabra por su raíz. \\
+	Tokenizer 				& ? \\ \hline
+	\end{tabular}
+	\end{tikzfigure}
+	\end{minipage}\\
+	\end{adjustbox}
+	}
 	
 \end{columns}	
 
 \begin{columns}
 	\column{0.30}
-	\block{Representación de Textos}{}
+	\block{REPRESENTACIÓN DE TEXTOS}{ }
     \block{TF-IDF}{
 		TF-IDF es una medida estadística que sirve para calcular la importancia de una palabra dentro de un texto. De forma simplificada, se considera que la importancia de una palabra aumenta cuantas más apariciones tenga en un documento dado, pero a su vez es inversamente proporcional a su ratio de aparición en otros documentos.
     }
     \block{Document Embeddings}{
-		Explicación.
+		Mediante Document Embeddings se puede representar cada texto de un conjunto de estos como un vector con valores numéricos, es decir, se representa cada texto en un espacio vectorial de n dimensiones. Esto es especialmente útil en casos como el que nos atañe, la clasificación, pues los clasificadores no pueden trabajar directamente con textos y necesitan que estos sean representados de alguna otra forma, siendo un vector una de las más simples de hacerlo.
 		
-		Gensim.
+		En nuestro caso utilizamos la librería Gensim para hacer esta transformación.
     }
     \column{0.30}
-   	\block{Clasificadores}{}
+   	\block{CLASIFICADORES}{}
 	\block{Naive Bayes}{
 		\paragraph{}Como clasificador de referencia hemos decidido utilizar Naive Bayes. Este algoritmo calcula la probabilidad de pertenencia a cada clase para cada atributo en función de su valor. Con esto se está suponiendo que los atributos son independientes entre sí. Cuando se dispone a clasificar, realiza la predicción en función de las probabilidades calculadas para cada uno de los atributos de la instancia dada y selecciona la clase que maximice esta probabilidad.
 		\paragraph{}Debido a que Naive Bayes asume una total independencia entre clases, consideramos que este clasificador es una buena base para comparar con otro clasificador más complejo.
@@ -67,7 +85,7 @@
     }
 
     \column{0.40}
-    \block{Resultados}{
+    \block{RESULTADOS}{
 		\blindtext
 		\includegraphics[scale=2]{img/PrecisionAccuracy.jpeg}
     }

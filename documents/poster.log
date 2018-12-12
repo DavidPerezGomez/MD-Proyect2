@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.14)  12 DEC 2018 23:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.13)  12 DEC 2018 23:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1230,10 +1230,10 @@ res re-sul-ta-dos con TF-IDF en am-
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./img/PrecisionAccuracy.jp
 eg>] (./poster.aux) ) 
 Here is how much of TeX's memory you used:
- 17868 strings out of 494747
- 383011 string characters out of 6176206
- 483842 words of memory out of 5000000
- 20765 multiletter control sequences out of 15000+600000
+ 17870 strings out of 494747
+ 383063 string characters out of 6176206
+ 483925 words of memory out of 5000000
+ 20767 multiletter control sequences out of 15000+600000
  36875 words of font info for 75 fonts, out of 8000000 for 9000
  107 hyphenation exceptions out of 8191
  62i,13n,84p,816b,933s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1241,7 +1241,7 @@ Here is how much of TeX's memory you used:
 /cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 csc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.p
 fb>
-Output written on poster.pdf (1 page, 103812 bytes).
+Output written on poster.pdf (1 page, 103914 bytes).
 PDF statistics:
  54 PDF objects out of 1000 (max. 8388607)
  27 compressed objects within 1 object stream

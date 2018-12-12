@@ -33,6 +33,10 @@ class CombinedNN(Classifier):
         if instances is None:
             instances = self._instances
 
+        # obtener las predicciones de cada clasificador
+        # doble array (clasificador, instancia) de diccionarios
+        # en cada diccionario, las clases, como claves, y sus probabilidades
+        # las probabilidades están ponderadas al accuracy de cada clasificador
         predictions = []
         for model in self._trained_model:
             prediction_tmp = model['model'].predict_proba(instances) * model['accuracy']
@@ -43,6 +47,9 @@ class CombinedNN(Classifier):
                 prediction.append(dict(zip(classes, pred)))
             predictions.append(prediction)
 
+        # obtener, para cada instancia, las probabilidades de cada clase
+        # se toma la suma de las probabilidades
+        # por cada instancia, diccionario con las clases y sus valores
         probabilities = []
         for i, instance in enumerate(instances):
             probability = {}
@@ -59,6 +66,8 @@ class CombinedNN(Classifier):
                         probability[class_name] = prob
             probabilities.append(probability)
 
+        # se calculan los resultados
+        # a cada instancia se le asigna clase con mayor valor
         results = []
         for probability in probabilities:
             class_name = list(probability.keys())[np.argmax(list(probability.values()))]

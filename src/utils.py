@@ -32,7 +32,9 @@ def tfidf_filter(data_frame, text_attribute, class_attribute=None):
     """Aplica el filtro TF-IDF a las instancias.
 
     data_frame: instancias a filtrar. Vienen en forma de dataframe.
-    attribute: nombre del atributo texto a transformar."""
+    text_attribute: nombre del atributo texto a transformar.
+    class_attribute: nombre del atributo que usar como referencia para saleccionar los mejores atributos.
+    """
 
     tfidf_vectorizer = TfidfVectorizer(use_idf=True)
     tfidf_matrix = tfidf_vectorizer.fit_transform(data_frame[text_attribute].values.astype('U'))
@@ -53,7 +55,8 @@ def doc2vec(data_frame, attribute, vector_size=50, min_count=2, epochs=40, save_
     attribute: nombre del atributo texto a transformar.
     vector_size: tamaño de los vectores resultantes.
     min_count: número mínimo de veces que tiene que aparecer una palabra para ser tomada en cuenta.
-    epochs: número de iteraciones sobre los datos."""
+    epochs: número de iteraciones sobre los datos.
+    """
 
     if save_path is not None and os.path.isfile(save_path):
         model = d2v.Doc2Vec.load(save_path)
@@ -78,7 +81,8 @@ def _doc2vec_model(sentences, vector_size=50, min_count=2, epochs=40, save_path=
     vector_size: tamaño de los vectores resultantes.
     min_count: número mínimo de veces que tiene que aparecer una palabra para ser tomada en cuenta.
     epochs: número de iteraciones sobre los datos.
-    save_path: ruta en la que guardar el modelo."""
+    save_path: ruta en la que guardar el modelo.
+    """
 
     model = d2v.Doc2Vec(vector_size=vector_size, min_count=min_count, epochs=epochs)
     model.build_vocab(documents=sentences)

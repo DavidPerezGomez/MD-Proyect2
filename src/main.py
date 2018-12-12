@@ -134,7 +134,7 @@ def main():
                                     "results_{}-fcv.csv".format(args.k))
     model_path = os.path.join(args.output_folder,
                               "model.pkl")
-    classifier.set_input_format(instances[:50], classes[:50])
+    classifier.set_input_format(instances, classes)
     # classifier.train(instances, classes)
     # classifier.predict(instances)
     classifier.k_fcv(k=args.k, instances=instances, classes=classes,

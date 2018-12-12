@@ -34,42 +34,42 @@
 
 	\column{0.40}
 	\block{}{
-	TABLA?
+	AQUÍ IRIA UNA PUTA TABLA
 	}
 	
 	\column{0.30}
 	\block{Datos}{
-	\blindtext
-	}
+	El conjunto de datos es Verbal Autopsies, un conjunto de autopsias verbales realizadas en diversos países y que agrupa una gran variedad de enfermedades y causas de muerte. Serán estas las que nuestro clasificador utilice como clase a predecir.
+	En cuanto a las entradas, utilizaremos el atributo correspondiente a la autopsia verbal en sí (gs\_text34). 
+	}	
 	
 \end{columns}	
 
 \begin{columns}
 	\column{0.30}
-    \block{TFIDF}{
-		\blindtext
-    }\note[
-        targetoffsetx=-6.2cm, 
-        targetoffsety=-3.5cm, 
-        width=0.22\linewidth
-        ]
-        {nota}
-	\block{Naive Bayes}{
-		\blindtext
+	\block{Representación de Textos}{}
+    \block{TF-IDF}{
+		TF-IDF es una medida estadística que sirve para calcular la importancia de una palabra dentro de un texto. De forma simplificada, se considera que la importancia de una palabra aumenta cuantas más apariciones tenga en un documento dado, pero a su vez es inversamente proporcional a su ratio de aparición en otros documentos.
     }
-	   
-    
-    \column{0.30}
     \block{Document Embeddings}{
-		\blindtext
-    } 
+		Explicación.
+		
+		Gensim.
+    }
+    \column{0.30}
+   	\block{Clasificadores}{}
+	\block{Naive Bayes}{
+		\paragraph{}Como clasificador de referencia hemos decidido utilizar Naive Bayes. Este algoritmo calcula la probabilidad de pertenencia a cada clase para cada atributo en función de su valor. Con esto se está suponiendo que los atributos son independientes entre sí. Cuando se dispone a clasificar, realiza la predicción en función de las probabilidades calculadas para cada uno de los atributos de la instancia dada y selecciona la clase que maximice esta probabilidad.
+		\paragraph{}Debido a que Naive Bayes asume una total independencia entre clases, consideramos que este clasificador es una buena base para comparar con otro clasificador más complejo.
+    }
     \block{Redes Neuronales}{
 		\blindtext
     }
 
     \column{0.40}
     \block{Resultados}{
-		\blindtext\blindtext\blindtext
+		\blindtext
+		\includegraphics[scale=2]{img/PrecisionAccuracy.jpeg}
     }
     
 \end{columns}

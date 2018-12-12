@@ -1,7 +1,7 @@
 """usage: main.py [-h] -d DATA_PATH -o OUTPUT_FOLDER -a TEXT_ATTRIBUTE -c
                CLASS_ATTRIBUTE
                [-t | -d2v VECTOR_SIZE MIN_COUNT EPOCHS MODEL_PATH]
-               [-nb | -nn N_MODELS [NEURONS ...]] [-k K]
+               [-nb | -nn N_MODELS [NEURONS ...]] [-k K] [-v]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -26,8 +26,8 @@ optional arguments:
                         neuronas de la red neuronal. Cada número es el número
                         de neuronas de na capa oculta.
   -k K                  número de folds para el k-fold cross-validation
+  -v, --verbose         flag para imprimir información adicional por pantalla
 """
-
 from argparse import ArgumentParser
 import pandas as pd
 import numpy as np

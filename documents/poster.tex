@@ -1,0 +1,77 @@
+\documentclass[25pt,landscape]{tikzposter}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{blindtext}
+\usepackage{comment}
+
+\title{Clasificación de Textos: Naive Bayes vs Neural Networks}
+\author{David Pérez Gómez \& Guzmán López Santamaría}
+\date{}
+\institute{EUITI - UPV/EHU}
+
+\usetheme{Simple}
+\usecolorstyle{Denmark}
+
+\tikzposterlatexaffectionproofoff
+
+\settitle{ \centering \vbox{
+\centering
+\color{white} {\bfseries \Huge \sc \@title \par}
+\vspace*{1em}
+{\huge \@author \par} \vspace*{1em} {\LARGE \@institute}
+}}
+
+
+\begin{document}
+
+\maketitle
+\begin{columns}
+	\column{0.30}
+	\block{Objetivos}{
+	Dado un conjunto de datos de autopsias verbales se quiere realizar un proceso de clasificación mediante el cual se prediga una clase para cada instancia. Este proceso se llevará a cabo mediante dos clasificadores diferentes y representando el conjunto de datos de dos formas distintas. El objetivo de este proyecto es analizar y comparar los resultados obtenidos para cada uno de los clasificadores y de las representaciones.
+	}
+
+	\column{0.40}
+	\block{}{
+	TABLA?
+	}
+	
+	\column{0.30}
+	\block{Datos}{
+	\blindtext
+	}
+	
+\end{columns}	
+
+\begin{columns}
+	\column{0.30}
+    \block{TFIDF}{
+		\blindtext
+    }\note[
+        targetoffsetx=-6.2cm, 
+        targetoffsety=-3.5cm, 
+        width=0.22\linewidth
+        ]
+        {nota}
+	\block{Naive Bayes}{
+		\blindtext
+    }
+	   
+    
+    \column{0.30}
+    \block{Document Embeddings}{
+		\blindtext
+    } 
+    \block{Redes Neuronales}{
+		\blindtext
+    }
+
+    \column{0.40}
+    \block{Resultados}{
+		\blindtext\blindtext\blindtext
+    }
+    
+\end{columns}
+ 	
+\end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.13)  12 DEC 2018 21:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.11.13)  12 DEC 2018 21:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1035,35 +1035,78 @@ Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 (/usr/share/texlive/texmf-dist/tex/latex/comment/comment.sty
 \CommentStream=\write5
 
-Excluding comment 'comment') (./poster.aux)
+Excluding comment 'comment')
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2012/05/21 v1.0 Adjusting TeX boxes (trim, clip, ...)
+
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2012/05/16 v1.0 Trim and clip general TeX material
+
+(/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box96
+)
+\tc@llx=\dimen310
+\tc@lly=\dimen311
+\tc@urx=\dimen312
+\tc@ury=\dimen313
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2012/05/13 v1.0 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen314
+\adjbox@Height=\dimen315
+\adjbox@Depth=\dimen316
+\adjbox@Totalheight=\dimen317
+
+(/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
+\c@checkoddpage=\count145
+)
+(/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box97
+\sift@deathcycles=\count146
+\@vwid@loff=\dimen318
+\@vwid@roff=\dimen319
+))
+
+Package tikzposter Warning: Unknown color palette `GrayOrangeBlue'. on input li
+ne 14.
+
+(./poster.aux)
 \openout1 = `poster.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-
-ABD: EveryShipout initializing macros
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+ ABD: EveryShipout initializing macros
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count145
-\scratchdimen=\dimen310
-\scratchbox=\box96
-\nofMPsegments=\count146
-\nofMParguments=\count147
+\scratchcounter=\count147
+\scratchdimen=\dimen320
+\scratchbox=\box98
+\nofMPsegments=\count148
+\nofMParguments=\count149
 \everyMPshowfont=\toks31
-\MPscratchCnt=\count148
-\MPscratchDim=\dimen311
-\MPnumerator=\count149
-\makeMPintoPDFobject=\count150
+\MPscratchCnt=\count150
+\MPscratchDim=\dimen321
+\MPnumerator=\count151
+\makeMPintoPDFobject=\count152
 \everyMPtoPDFconversion=\toks32
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1155,40 +1198,35 @@ Missing character: There is no 1 in font nullfont!
 Missing character: There is no = in font nullfont!
 Missing character: There is no 1 in font nullfont!
 
-Overfull \hbox (235.24033pt too wide) in paragraph at lines 29--29
- [][] 
+Overfull \hbox (575.1247pt too wide) in paragraph at lines 61--61
+ [] 
  []
 
-
-Overfull \hbox (235.24033pt too wide) in paragraph at lines 29--29
- [][] 
- []
-
-<img/PrecisionAccuracy.jpeg, id=29, 642.4pt x 481.8pt>
+<img/PrecisionAccuracy.jpeg, id=35, 642.4pt x 481.8pt>
 File: img/PrecisionAccuracy.jpeg Graphic file (type jpg)
 <use img/PrecisionAccuracy.jpeg>
-Package pdftex.def Info: img/PrecisionAccuracy.jpeg  used on input line 74.
+Package pdftex.def Info: img/PrecisionAccuracy.jpeg  used on input line 90.
 (pdftex.def)             Requested size: 1284.79688pt x 963.59763pt.
 
-Underfull \hbox (badness 1796) in paragraph at lines 74--74
+Underfull \hbox (badness 2020) in paragraph at lines 90--90
  [] \T1/aer/m/n/29.86 Los re-sul-ta-dos se han obtenido apli-cando el método 10
 -fold cross-validation a cada mod-
  []
 
 
-Underfull \hbox (badness 1983) in paragraph at lines 74--74
+Underfull \hbox (badness 2221) in paragraph at lines 90--90
 \T1/aer/m/n/29.86 des neu-ronales, re-al-izamos dis-tin-tas prue-bas, cam-biand
 o los pa¯amet-ros (n$[]$ de mod-e-los, n$[]$
  []
 
 
-Underfull \hbox (badness 2608) in paragraph at lines 74--74
+Underfull \hbox (badness 2856) in paragraph at lines 90--90
 \T1/aer/m/n/29.86 de ca-pas ocul-tas, n$[]$ de neu-ronas) y nos quedamos con lo
 s mejores re-sul-ta-dos obtenidos.
  []
 
 
-Overfull \hbox (53.95093pt too wide) in paragraph at lines 74--74
+Overfull \hbox (48.26047pt too wide) in paragraph at lines 90--90
 [] 
  []
 
@@ -1197,21 +1235,21 @@ Overfull \hbox (53.95093pt too wide) in paragraph at lines 74--74
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./img/PrecisionAccuracy.jp
 eg>] (./poster.aux) ) 
 Here is how much of TeX's memory you used:
- 17347 strings out of 494747
- 374189 string characters out of 6176206
- 467410 words of memory out of 5000000
- 20274 multiletter control sequences out of 15000+600000
- 33729 words of font info for 69 fonts, out of 8000000 for 9000
+ 17870 strings out of 494747
+ 383063 string characters out of 6176206
+ 482414 words of memory out of 5000000
+ 20767 multiletter control sequences out of 15000+600000
+ 36875 words of font info for 75 fonts, out of 8000000 for 9000
  107 hyphenation exceptions out of 8191
- 62i,9n,84p,816b,865s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,13n,84p,816b,933s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 csc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.p
 fb>
-Output written on poster.pdf (1 page, 98450 bytes).
+Output written on poster.pdf (1 page, 102531 bytes).
 PDF statistics:
- 48 PDF objects out of 1000 (max. 8388607)
- 24 compressed objects within 1 object stream
+ 54 PDF objects out of 1000 (max. 8388607)
+ 27 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 114 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 132 words of extra memory for PDF output out of 10000 (max. 10000000)
 
